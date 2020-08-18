@@ -45,7 +45,7 @@ const config: webpack.Configuration = {
 
             {
                 test: /\.html$/,
-                use: ["html-loader", "./hack.js"],
+                use: ["html-loader", "webpack-tl-loader"],
             },
         ]
     },
