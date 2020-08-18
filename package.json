@@ -1,6 +1,6 @@
 {
   "name": "webpack-tl-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "nunjucks templating language pre-processor for your bundle",
   "main": "dist/index.js",
   "scripts": {

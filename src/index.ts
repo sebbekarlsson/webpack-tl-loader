@@ -4,12 +4,15 @@ import * as fs from 'fs';
 
 type TDict = {[x: string]: any};
 
-const DATA_PATH:string = path.join(__dirname, "data");
+const APP_ROOT: string = process.env.PWD;
+const DATA_PATH:string = path.join(APP_ROOT, "data");
 const ENCODING:string = 'utf8';
-const MODIFIER_FILE:string = 'modifier.js';
+const MODIFIER_FILE:string = path.join(DATA_PATH, 'modifier.js');
+const DEFAULT_MODIFIER = { default: (data: any):any => data };
 
 const cleanName = (name: string) => name.replace(path.extname(name), '');
-const getHandler = async (name: string) => import(name.replace(path.extname(name), '.js'));
+const modifierExists = () => fs.existsSync(MODIFIER_FILE);
+const getModifier = async (name: string) => modifierExists() ? import(MODIFIER_FILE) : DEFAULT_MODIFIER;
 const applyFilter = (list, filterf) => filterf ? list.filter(filterf) : list;
 
 const iterateFiles = (basedir: string, iterator: any, filterf: any) => applyFilter(
@@ -31,8 +34,8 @@ const generateContext = (basedir:string):TDict => mergeObjects(getObjects(basedi
 export default function(source:string) {
     const callback = this.async();
 
-    getHandler(path.join(DATA_PATH, MODIFIER_FILE))
-        .then(handler => callback(null, nunjucks.renderString(
-            source, handler.default(generateContext(DATA_PATH)))))
+    getModifier(path.join(DATA_PATH, MODIFIER_FILE))
+        .then(modifier => callback(null, nunjucks.renderString(
+            source, modifier.default(generateContext(DATA_PATH)))))
                 .catch(err => console.log(err));;
 };
