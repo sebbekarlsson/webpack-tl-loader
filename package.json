@@ -1,0 +1,29 @@
+{
+  "name": "webpack-tl-loader",
+  "version": "1.0.0",
+  "description": "nunjucks templating language pre-processor for your bundle",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nunjucks",
+    "templating",
+    "templating-language",
+    "preprocessor",
+    "pre-processor",
+    "bundle",
+    "jinja",
+    "jinja2"
+  ],
+  "author": "ianertson@gmail.com",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "nunjucks": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
