@@ -33,7 +33,7 @@
 npm install -D webpack-tl-loader
 ```
 > And then edit your webpack config and add the following:
-```json
+```typescript
 const config: webpack.Configuration = {
 
     ...
